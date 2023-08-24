@@ -1,7 +1,9 @@
 # Tienda Crisfer-Market
 
-En la tienda se hace primero la compra de stock con limitacion de por espacio y saldo.
-Despues el cliente hace compras ingresando el codigo (ID) y la cantidad que quiere comprar.
+En la tienda se hace primero la compra de stock con limitacion de por espacio y saldo. 
+El codigo del producto al comprarlo solo requiere 3 digitos, cuando se guarda en el stock el programa se encarga de completar el codigo (ID) segun la clase de producto que es.
+
+Despues el cliente hace compras ingresando el codigo completo (ID) y la cantidad que quiere comprar.
 
 En cada venta se vera reflejado los productos con sus respectivas cantidades, precios y descuentos si los tienen.
 Tambien se vera el saldo de la Tienda despues de la venta.
