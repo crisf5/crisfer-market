@@ -38,6 +38,7 @@ public class AplicacionTienda {
         Tienda tienda = new Tienda("Cordobes", 50, 500d);
         System.out.println("---------------------");
         System.out.println("Saldo inicial de la tienda '"+ tienda.getNombre() +"' es de $" + tienda.getSaldoCaja());
+        System.out.println("El espacio maximo para stock es " + tienda.getMaximoProductosStock());
         System.out.println();
         System.out.println("Compra de Stock:");
         tienda.agregarProductosTienda(leche);
