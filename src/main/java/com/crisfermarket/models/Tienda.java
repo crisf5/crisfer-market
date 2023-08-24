@@ -154,6 +154,7 @@ public class Tienda {
         System.out.println();
         productosVendidos.forEach(pv-> System.out.println(pv));
         System.out.println("TOTAL VENTA: " + totalVenta);
+        this.saldoCaja += totalVenta;
 
     }
 

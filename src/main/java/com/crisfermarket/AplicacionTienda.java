@@ -33,9 +33,11 @@ public class AplicacionTienda {
         Limpieza detergente = new Limpieza(777, "Detergente Burbujas", 4, 4d, 2d, TipoAplicacion.COCINA);
 
 
+        Tienda tienda = new Tienda("Cordobes", 50, 500d);
         System.out.println("---------------------");
+        System.out.println("Saldo inicial de la tienda '"+ tienda.getNombre() +"' es de $" + tienda.getSaldoCaja());
+        System.out.println();
         System.out.println("Compra de Stock:");
-        Tienda tienda = new Tienda("Cordobe", 50, 500d);
         tienda.agregarProductosTienda(leche);
         tienda.agregarProductosTienda(cerveza);
         tienda.agregarProductosTienda(gaseosa);
@@ -47,6 +49,8 @@ public class AplicacionTienda {
         System.out.println();
         tienda.getProductosEnStock().values().stream().forEach(p->p.stream()
                 .forEach(pc-> System.out.println(pc.getDescripcion() + " " + pc.getCantidadStock() + " unidades")));
+        System.out.println();
+        System.out.println("El saldo despues de la compra de stock es de $" + tienda.getSaldoCaja());
         System.out.println("---------------------");
 
 
@@ -56,6 +60,9 @@ public class AplicacionTienda {
         primeraVenta.put("ac456", 6);
         primeraVenta.put("ac789", 2);
         tienda.ventaProductos(primeraVenta);
+
+        System.out.println();
+        System.out.println("El saldo total de la tienda queda en $" + tienda.getSaldoCaja());
         System.out.println("---------------------");
 
 
@@ -65,6 +72,9 @@ public class AplicacionTienda {
         segundaVenta.put("ab159", 5);
         segundaVenta.put("ab784", 6);
         tienda.ventaProductos(segundaVenta);
+
+        System.out.println();
+        System.out.println("El saldo total de la tienda queda en $" + tienda.getSaldoCaja());
         System.out.println("---------------------");
 
 
@@ -73,6 +83,9 @@ public class AplicacionTienda {
         terceraVenta.put("ac789", 11);
         terceraVenta.put("ac147", 9);
         tienda.ventaProductos(terceraVenta);
+
+        System.out.println();
+        System.out.println("El saldo total de la tienda queda en $" + tienda.getSaldoCaja());
         System.out.println("---------------------");
 
 
