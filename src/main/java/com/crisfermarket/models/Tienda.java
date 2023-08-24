@@ -98,6 +98,7 @@ public class Tienda {
     public void ventaProductos(HashMap<String, Integer> idProductoCantidadStock){
 
         List<String> productosVendidos = new ArrayList<>();
+        List<Producto> productosConDescuento = new ArrayList<>();
 
             double totalVenta = idProductoCantidadStock.entrySet()
                 .stream()
@@ -122,6 +123,12 @@ public class Tienda {
                         return 0;
                     }
 
+                    if(producto instanceof Descuento){
+                        if(((Descuento) producto).getPorcentajeDescuento() > 0){
+                            productosConDescuento.add(producto);
+                        }
+                    }
+
                     if(productosVendidos.size() >= 3){
                         System.out.println("Solo esta permitido comprar 3 productos");
                         return 0;
@@ -141,7 +148,12 @@ public class Tienda {
                         return 0;
                     }
 
-                    double precioVenta = producto.getPrecioPorUnidad();
+                    double precioVenta;
+                    if(producto instanceof Descuento && ((Descuento) producto).getPrecioVentaConDescuento() > 0){
+                        precioVenta = ((Descuento) producto).getPrecioVentaConDescuento();
+                    }else{
+                        precioVenta = producto.getPrecioPorUnidad();
+                    }
                     double totalPrecio = precioVenta * cantidadStock;
                     producto.setCantidadStock(producto.getCantidadStock() - cantidadStock);
 
@@ -154,8 +166,26 @@ public class Tienda {
         System.out.println();
         productosVendidos.forEach(pv-> System.out.println(pv));
         System.out.println("TOTAL VENTA: " + totalVenta);
-        this.saldoCaja += totalVenta;
+        System.out.println();
+        System.out.println("Productos con descuento:");
 
+        Boolean hayDescuentos = false;
+        for (Producto producto : productosConDescuento) {
+            if (producto instanceof Descuento) {
+                Descuento productoConDescuento = (Descuento) producto;
+                System.out.println(((Producto)productoConDescuento).getId() + " " + ((Producto)productoConDescuento).getDescripcion()
+                        + " " + productoConDescuento.getPorcentajeDescuento() + "% - Precio normal $" + ((Producto) productoConDescuento).getPrecioPorUnidad()
+                        + " - Precio con descuento $" + productoConDescuento.getPrecioVentaConDescuento());
+                hayDescuentos = true;
+            }
+        }
+
+        if (!hayDescuentos) {
+            System.out.println("La venta no tiene productos con descuento");
+        }
+
+
+        this.saldoCaja += totalVenta;
     }
 
 
@@ -163,10 +193,12 @@ public class Tienda {
 
       Stream<Producto> productosComestibles = Stream.concat(
               productosEnStock.get("ENVASADOS").stream()
-                      .filter(p -> !(((Envasado) p).getImportado()) && ((Envasado) p).getPorcentajeDescuento() <= porcentajeDescuento)
+                      .filter(p -> !(((Envasado) p).getImportado()) && ((Envasado) p).getPorcentajeDescuento() > 0
+                              && ((Envasado) p).getPorcentajeDescuento() <= porcentajeDescuento)
                       .map(p -> (Envasado) p),
               productosEnStock.get("BEBIDAS").stream()
-                      .filter(p -> !(((Bebida) p).getImportado()) && ((Bebida) p).getPorcentajeDescuento() <= porcentajeDescuento)
+                      .filter(p -> !(((Bebida) p).getImportado()) && ((Bebida) p).getPorcentajeDescuento() > 0
+                              && ((Bebida) p).getPorcentajeDescuento() <= porcentajeDescuento)
                       .map(p -> (Bebida) p)
       );
 

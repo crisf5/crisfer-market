@@ -27,7 +27,9 @@ public class AplicacionTienda {
 
 
         Envasado arroz = new Envasado(159, "Arroz Arrocito", 4, 4d, 2d, TipoEnvase.PLASTICO, false);
+        arroz.setPorcentajeDescuento(15);
         Envasado salsaTomate = new Envasado(784, "Salsa TomaT", 6, 3d, 1d, TipoEnvase.LATA, false);
+        salsaTomate.setPorcentajeDescuento(10);
 
         Limpieza jabon = new Limpieza(654, "Jabon el Limpiador", 6, 2d,1d, TipoAplicacion.MULTIUSO);
         Limpieza detergente = new Limpieza(777, "Detergente Burbujas", 4, 4d, 2d, TipoAplicacion.COCINA);
@@ -90,7 +92,7 @@ public class AplicacionTienda {
 
 
 
-        System.out.println("Productos comestibles no importados con descuento menor a 10%: " + tienda.obtenerComestibleConMenorDescuento(10));
+        System.out.println("Productos comestibles no importados con descuento menor a 15%: " + tienda.obtenerComestibleConMenorDescuento(15));
         System.out.println("---------------------");
 
 
